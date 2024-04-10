@@ -2,6 +2,13 @@ from cs50 import SQL
 from flask_session import Session
 from flask import Flask, render_template, redirect, request, session, jsonify
 from datetime import datetime
+from flask import Flask, render_template
+import barcode
+from barcode.writer import ImageWriter
+import io
+from flask import Flask, render_template, send_file
+import qrcode
+
 
 # # Instantiate Flask object named app
 app = Flask(__name__)
@@ -269,5 +276,18 @@ def cart():
             totItems += shoppingCart[i]["SUM(qty)"]
     # Render shopping cart
     return render_template("cart.html", shoppingCart=shoppingCart, shopLen=shopLen, total=total, totItems=totItems, display=display, session=session)
+
+
+@app.route('/info/')
+def pay():
+    return render_template("payment.html")
+
+    
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+    
+
 
 
